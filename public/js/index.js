@@ -288,13 +288,9 @@ $(".btn").on("click", function (event) {
 
             });
 
-
-
-
-
     })
 
-    if (carouselIndex == 5) {
+    if (carouselIndex == 15) {
         console.log(totalScore);
         
 

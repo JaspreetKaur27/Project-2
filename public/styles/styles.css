@@ -6,6 +6,11 @@ body {
 }
 
 
+#index-background {
+  background: url("../images/index-background.jpg")no-repeat center center white;
+  background: cover;
+}
+
 .header {
     height: 100px;
     line-height: 100px;
