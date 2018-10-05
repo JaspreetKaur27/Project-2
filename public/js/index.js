@@ -277,20 +277,8 @@ $(".btn").on("click", function (event) {
 
     console.log(totalScore);
 
-    $.post('/api/scores', totalScore, function (data) {
-
-
-        burger.update(
-            condition,
-            function (result) {
-                console.log(result);
-                res.sendStatus(200);
-
-            });
-
-    })
-
-    if (carouselIndex == 15) {
+  
+    if (carouselIndex === 30) {
         console.log(totalScore);
         
 
@@ -303,9 +291,7 @@ $(".btn").on("click", function (event) {
 
     });
     
-        
-
-       
+  
     }
 });
 
