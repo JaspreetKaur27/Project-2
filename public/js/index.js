@@ -264,9 +264,9 @@ $(".btn").on("click", function (event) {
     }
 
     function addScore() {
-        totalScore = totalScore + 10;
+        totalScore = totalScore + 1;
         //update score 
-        $('#score').text(totalScore);
+        $('#score').text("Score :" + totalScore +"/30");
         console.log("Total Score: " + totalScore);
     }
     //   var last = $(`#question-${carouselIndex}`).dataset();
