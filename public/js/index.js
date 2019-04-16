@@ -148,40 +148,40 @@ var signIn = function (event) {
 
     console.log(signinUsername.val());
     console.log(signinPassword.val());
-        if (signinPassword.val().length !== 0) {
-            if (signinUsername.val().length !== 0) {
-                clearErrorMessages();
-                backend_signin();
-                clearInputFields();
+    if (signinPassword.val().length !== 0) {
+        if (signinUsername.val().length !== 0) {
+            clearErrorMessages();
+            backend_signin();
+            clearInputFields();
 
-            } else {
-                clearErrorMessages();
-                document.getElementById("UsernameNull").style.display = "block";
-                clearInputFields();
-            }
         } else {
             clearErrorMessages();
-            document.getElementById("PasswordNull").style.display = "block";
+            document.getElementById("UsernameNull").style.display = "block";
             clearInputFields();
         }
-    } 
+    } else {
+        clearErrorMessages();
+        document.getElementById("PasswordNull").style.display = "block";
+        clearInputFields();
+    }
+}
 
-    //    var example = {
-    //        text: $exampleText.val().trim(),
-    //        description: $exampleDescription.val().trim()
-    //    };
-    //
-    //    if (!(example.text && example.description)) {
-    //        alert("You must enter an example text and description!");
-    //        return;
-    //    }
-    //
-    //    API.saveExample(example).then(function () {
-    //        refreshExamples();
-    //    });
-    //
-    //    $exampleText.val("");
-    //    $exampleDescription.val("")
+//    var example = {
+//        text: $exampleText.val().trim(),
+//        description: $exampleDescription.val().trim()
+//    };
+//
+//    if (!(example.text && example.description)) {
+//        alert("You must enter an example text and description!");
+//        return;
+//    }
+//
+//    API.saveExample(example).then(function () {
+//        refreshExamples();
+//    });
+//
+//    $exampleText.val("");
+//    $exampleDescription.val("")
 
 
 
@@ -200,16 +200,8 @@ function contactBackEnd() {
             // window.location.href = "/";
 
             API.saveUser(user).then(function (res) {
-                console.log(res);  
-           window.localStorage.setItem('userObject',res);
 
-
-           //TODO
-
-                const player = window.localStorage.getItem('userObject');
-
-                console.log(player);
-            
+                console.log(res);
             });
         }
     });
@@ -227,14 +219,17 @@ function backend_signin() {
     console.log(user);
     API.checkUserExists(user.username).then(function (data) {
 
-    // TODO store user info in a variable
-    // const userObject = 
+
         console.log(data)
         if (data) {
+            // saving the user object once he signs in
+            localStorage.setItem('user', JSON.stringify(data));
+
+
             document.getElementById("SignUpSuccess").style.display = "block";
-            
+
             window.location.href = "/trivia";
-         
+
         } else {
             clearErrorMessages();
             document.getElementById("UsernameAlreadyExists").style.display = "block";
@@ -299,7 +294,7 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        // display.textContent = minutes + ":" + seconds;
+        display.textContent = minutes + ":" + seconds;
 
         if (diff <= 0) {
             // add one second so that the count down starts at the full duration
@@ -323,7 +318,7 @@ $(".btn").on("click", function (event) {
     clearInterval(timer);
 
 
-    var correctChoice = document.getElementById(`question-${carouselIndex}`).dataset;  
+    var correctChoice = document.getElementById(`question-${carouselIndex}`).dataset;
     // .dataset
     // var finalChoice = correctChoice[value];
 
@@ -357,49 +352,65 @@ $(".btn").on("click", function (event) {
     function addScore() {
         totalScore = totalScore + 1;
         //update score 
-        $('#score').text("Score :" + totalScore +"/30");
+        $('#score').text("Score :" + totalScore + "/30");
         console.log("Total Score: " + totalScore);
     }
     //   var last = $(`#question-${carouselIndex}`).dataset();
 
     console.log(totalScore);
 
-  
+
     if (carouselIndex === 5) {
         console.log(totalScore);
-        
+
         $('#score-modal').modal('toggle');
         $('#grand-score').text(totalScore);
 
-    $("#close-modal").on('click', function(){
-        window.location.href = "/scores";
+        $("#close-modal").on('click', function () {
+            window.location.href = "/scores";
 
-    });
-    
-    $("#play-again").on('click', function () {
+        });
+
+        $("#play-again").on('click', function () {
             window.location.href = "/trivia";
         });
 
-    $("#save-score").on('click', function () {
-       
-        const player = window.localStorage.getItem('userObject');
-        const player1 = Object.entries(player);
+        $("#save-score").on('click', function () {
 
-        console.log(player);
+            var user = JSON.parse(localStorage.getItem('user'));
+            console.log(user);
 
+            let data = {
+                totalScore: totalScore,
+                username: user.username,
+                UserId: user.id
+            }
 
-        $.post('/api/scores', {totalScore:totalScore,}, function (data) {
-            console.log(data)
+            $.post('api/scores', data).then(() => {
+
+                console.log("data has been saved");
+                window.location.href ="/api/all-scores"
+            }).catch((err) => {
+            console.log(err)
         })
 
-        });
+    });
 
 
- 
 
     }
 });
 
+
+scoreDelete = (id) => {
+    event.preventDefault();
+    console.log('delete' + id);
+
+ $.post('/api/delete-score/'+ id ).then((res) => {
+     console.log(res)
+     window.location.href = "/api/all-scores"
+ });
+}
 
 
 

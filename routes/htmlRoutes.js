@@ -60,21 +60,14 @@ module.exports = function (app) {
 
         });
         console.log('Data retrieved')
-
       }).catch((err) => {
-
         console.log(err);
-
       })
-
-
   });
 
   app.get("/", function (req, res) {
 
     res.render(path.join(__dirname, "../views/index.handlebars"));
-
-
   })
 
   // Load example page and pass in an example by id
@@ -87,9 +80,19 @@ module.exports = function (app) {
     res.render(path.join(__dirname, "../views/about.handlebars"));
   });
 
+  // app.get("/api/total-scores", function (req, res) {
 
+  //   res.render(path.join(__dirname, "../views/scores.handlebars"));
+  // });
 
+   app.get("/saved-scores", function (req, res) {
 
+    res.render('scores');
+  });
+
+  app.get("/about", function (req, res) {
+    res.render(path.join(__dirname, "../views/about.handlebars"));
+  });
   
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {

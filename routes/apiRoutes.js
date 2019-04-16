@@ -36,39 +36,14 @@ module.exports = function (app) {
     });
   });
 
- 
-  app.post("/api/scores", function (req, res) {
-
-    var {totalScore} = req.body;
-    console.log(totalScore);
-
-    db.Score.create({
-       scores: totalScore,
-       UserId:[db.User]
-    }).then(function (scores){
-      res.json(scores);
-    }).catch((err) => {
-      console.log(err);
-    })
-
-
-    // db.Example.findAll({}).then(function (dbExamples) {
-
-    //   res.json(dbExamples);
-    // });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
-  });
 
   // Delete an example by id
   app.delete("/api/examples/:id", function (req, res) {
+    console.log('reached route');
     db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
+      console.log(dbExample);
+      res.json(dbExample)
+      // res.redirect('/api/all-scores');
     });
   });
 };

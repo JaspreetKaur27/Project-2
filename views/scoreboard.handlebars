@@ -1,0 +1,52 @@
+<header>
+    <!--consistent nav bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a style="color: #007bff;" class="navbar-brand" href="/">Computer Science Trivia Game</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a style="color: #ffe066;" class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--new code header div-->
+</header>
+
+
+{{#if scores }}
+<div class="score-title">
+    <h1>Highest Scores</h1>
+</div>
+{{#each scores}}
+<div class="board-container">
+    <div class="score-info">
+       
+        <div class="stats">
+            <h1>{{this.User.username}}</h1>
+        </div>
+        <div class="stats">
+            <h1>{{this.scores}}</h1>
+        </div>
+        <form style="display:flex; align-items:center"onsubmit="scoreDelete({{this.id}})">
+        <button id="delete-button" type='submit' class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+{{/each}} 
+{{else}}
+    <div style="display:flex; justify-content:center; align-items:center">
+    <h1>no scores available</h1>
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+{{/if}}

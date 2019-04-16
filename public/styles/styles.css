@@ -11,6 +11,16 @@ body {
 
 }
 
+.navbar{
+    background-color: black !important;
+}
+.navbar-toggler{
+
+  background:white !important;
+
+}
+
+
 
 #index-background {
   background: url("../images/index-background.jpg")no-repeat center center white;
@@ -315,7 +325,7 @@ footer {
 }
 
 #question-choice {
-  color: #70c1b3;
+  color: darkcyan;
   margin-top : 3%;
   background: transparent;
   font-family: sans-serif;
@@ -323,11 +333,11 @@ footer {
   align-content: center;
   border-radius: 10px;
   width: 65%;
+  height: 75%;
   background: #f1f1f1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  
+
+
   padding: 30px 40px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -336,11 +346,11 @@ footer {
   font-family: "Montserrat",sans-serif;
 
 }
-/* .trivia-question {
-  text-align:center;
-  color: salmon;
-}  */
 
+.trivia-question{
+  font-size:1.7em;
+  color :#48497e;
+}
 #answer {
   background: white;
   border: black;
@@ -361,11 +371,13 @@ footer {
   height: 64px;
 }
 .lds-facebook div {
-  display: inline-block;
+  margin:0 auto;
+
   position: absolute;
+
   left: 6px;
   width: 13px;
-  background: #70c1b3;
+  background: khaki;
   animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
@@ -391,11 +403,55 @@ footer {
   }
 }
 
+/* scoreboard */
 
-@media only screen and (max-width: 690px)
-{
-  #question-choice
-  {
-    margin-top: 10%;
+.score-title{
+  display:flex;
+  justify-content: center;
+  margin:3%;
+}
+
+.board-container{
+  display:flex;
+  width: 100%;
+  justify-content: center;
+  margin: 10px;
+
+
+}
+
+.score-info{
+  display:flex;
+  justify-content: space-evenly;
+  margin: 20px;
+  width:60%;
+  border: 3px dotted #007bff;
+  padding:1%;
+
+
+}
+
+.stats {
+  display:flex;
+  text-align: center;
+  margin:20px;
+}
+
+
+
+@media screen and (max-width:550px){
+
+  body{
+    margin:0;
   }
+#question-choice {
+
+  width:80%;
+
+  margin-top:2%;
+  
+
+}
+
+
 }
