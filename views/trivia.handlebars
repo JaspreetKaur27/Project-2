@@ -1,5 +1,5 @@
 <!--new code added header div-->
-<header>
+<header class="header">
   <!--consistent nav bar-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Computer Science Trivia Game</a>
@@ -37,7 +37,7 @@
 
           </div>
           <div class="col col-md-4">
-              Trivia Mania!
+            Trivia Mania!
             <p id="username"></p>
           </div>
 
@@ -50,24 +50,33 @@
     <div class="row">
       <div class="col-lg-12">
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-interval="false" data-ride="carousel">
+          {{#if trivia }}
           <div class="carousel-inner">
             {{#each trivia}}
-              <div class="carousel-item {{#ifCond @index 0}}active{{/ifCond}}">
-                <div class="card-body" id="answer-options">
-                  <div>
-                    <h1 class="trivia-question" data-value="{{this.correctAnswer}}" id="question-{{@index}}">Question: {{this.question}}</h1>
-                    <div class="trivia-options">
-                      {{#each this.options}}
-                      <button type="button" data-value="{{this.options}}" class="btn btn-outline-dark btn-lg btn-block" id="answer-btn-{{@index}}">
-                        <div id="select-option">{{this}}</div>
-                      </button>
-                      {{/each}}
-                    </div>
+            <div class="carousel-item {{#ifCond @index 0}}active{{/ifCond}}">
+              <div class="card-body" id="answer-options">
+                <div>
+                  <h1 class="trivia-question" data-value="{{this.correctAnswer}}" id="question-{{@index}}">{{this.question}}</h1>
+                  <div class="trivia-options">
+                    {{#each this.options}}
+                    <button type="button" data-value="{{this.options}}" class="btn btn-outline-dark btn-lg btn-block" id="answer-btn-{{@index}}">
+                      <div id="select-option">{{this}}</div>
+                    </button>
+                    {{/each}}
                   </div>
                 </div>
               </div>
+            </div>
             {{/each}}
           </div>
+          {{else}}
+        <h4 style="margin: 0 auto">Loading...</h3>
+          <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          {{/if}}
           <p id="userChoice"></p>
         </div>
       </div>
@@ -92,7 +101,10 @@
       </div>
       <div class="modal-footer">
 
-        <button type="button" class="btn btn-secondary" id="close-modal"data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" id="close-modal" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" id="play-again" data-dismiss="modal">Play Again</button>
+        <button type="button" class="btn btn-primary" id="save-score" data-dismiss="modal">Save Score</button>
+
       </div>
     </div>
   </div>

@@ -26,6 +26,7 @@ app.set("view engine", "handlebars");
 app.use(express.static(__dirname + "/public"));
 
 // Routes
+require("./routes/scores")(app);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 

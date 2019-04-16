@@ -1,7 +1,15 @@
 // Get references to page elements
-var $submitBtn = $("#submit");
+var $submitBtn = $("#submit-signup");
+var $signinBtn = $("#submit-signin");
+
+// signin
+var signinUsername = $("#signinUsername");
+var signinPassword = $("#signinPassword");
+
+
 var $exampleList = $("#example-list");
 
+// signup
 var SignUpUsername = $("#SignUpUsername");
 var SignUpPassword = $("#SignUpPassword");
 var ReSignUpPassword = $("#ReSignUpPassword");
@@ -91,7 +99,7 @@ var handleFormSubmit = function (event) {
 
     clearErrorMessages();
 
-    if (SignUpPassword.val() === ReSignUpPassword.val()) {
+    if (SignUpPassword.val().trim() === ReSignUpPassword.val().trim()) {
         if (SignUpPassword.val().length !== 0) {
             if (SignUpUsername.val().length !== 0) {
                 clearErrorMessages();
@@ -132,25 +140,112 @@ var handleFormSubmit = function (event) {
     //    $exampleDescription.val("");
 };
 
+
+var signIn = function (event) {
+    console.log('signin');
+    event.preventDefault();
+    clearErrorMessages();
+
+    console.log(signinUsername.val());
+    console.log(signinPassword.val());
+        if (signinPassword.val().length !== 0) {
+            if (signinUsername.val().length !== 0) {
+                clearErrorMessages();
+                backend_signin();
+                clearInputFields();
+
+            } else {
+                clearErrorMessages();
+                document.getElementById("UsernameNull").style.display = "block";
+                clearInputFields();
+            }
+        } else {
+            clearErrorMessages();
+            document.getElementById("PasswordNull").style.display = "block";
+            clearInputFields();
+        }
+    } 
+
+    //    var example = {
+    //        text: $exampleText.val().trim(),
+    //        description: $exampleDescription.val().trim()
+    //    };
+    //
+    //    if (!(example.text && example.description)) {
+    //        alert("You must enter an example text and description!");
+    //        return;
+    //    }
+    //
+    //    API.saveExample(example).then(function () {
+    //        refreshExamples();
+    //    });
+    //
+    //    $exampleText.val("");
+    //    $exampleDescription.val("")
+
+
+
 function contactBackEnd() {
     var user = {
-        username: SignUpUsername.val(),
-        password: SignUpPassword.val()
+        username: SignUpUsername.val().trim(),
+        password: SignUpPassword.val().trim()
     };
     API.checkUserExists(user.username).then(function (data) {
+        console.log(data);
         if (data) {
             document.getElementById("UsernameAlreadyExists").style.display = "block";
         } else {
             clearErrorMessages();
             document.getElementById("SignUpSuccess").style.display = "block";
-            window.location.href = "/";
+            // window.location.href = "/";
 
-            API.saveUser(user).then(function (data) {
-                console.log(data);
+            API.saveUser(user).then(function (res) {
+                console.log(res);  
+           window.localStorage.setItem('userObject',res);
+
+
+           //TODO
+
+                const player = window.localStorage.getItem('userObject');
+
+                console.log(player);
+            
             });
         }
     });
 }
+
+
+
+function backend_signin() {
+    console.log('backend signin');
+    var user = {
+        username: signinUsername.val().trim(),
+        password: signinPassword.val().trim()
+    };
+
+    console.log(user);
+    API.checkUserExists(user.username).then(function (data) {
+
+    // TODO store user info in a variable
+    // const userObject = 
+        console.log(data)
+        if (data) {
+            document.getElementById("SignUpSuccess").style.display = "block";
+            
+            window.location.href = "/trivia";
+         
+        } else {
+            clearErrorMessages();
+            document.getElementById("UsernameAlreadyExists").style.display = "block";
+
+            // API.saveUser(user).then(function (data) {
+            //     console.log(data);
+            // });
+        }
+    });
+}
+
 
 function clearErrorMessages() {
     document.getElementById("PasswordsNotMatch").style.display = "none";
@@ -178,15 +273,12 @@ var handleDeleteBtnClick = function () {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
+$signinBtn.on("click", signIn);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 var carouselIndex = 0;
 
 var totalScore = 0;
-
-// $("#score").text(totalScore);
-
-
 
 var timer = 0;
 
@@ -207,7 +299,7 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds;
+        // display.textContent = minutes + ":" + seconds;
 
         if (diff <= 0) {
             // add one second so that the count down starts at the full duration
@@ -231,7 +323,8 @@ $(".btn").on("click", function (event) {
     clearInterval(timer);
 
 
-    var correctChoice = document.getElementById(`question-${carouselIndex}`).dataset;
+    var correctChoice = document.getElementById(`question-${carouselIndex}`).dataset;  
+    // .dataset
     // var finalChoice = correctChoice[value];
 
     // correctChoice.assign({}
@@ -254,8 +347,6 @@ $(".btn").on("click", function (event) {
     carouselIndex++;
 
 
-
-
     if (userChoice == correctString) {
         console.log("correct");
         addScore();
@@ -271,18 +362,12 @@ $(".btn").on("click", function (event) {
     }
     //   var last = $(`#question-${carouselIndex}`).dataset();
 
-
-
-
-
     console.log(totalScore);
 
   
-    if (carouselIndex === 30) {
+    if (carouselIndex === 5) {
         console.log(totalScore);
         
-
-
         $('#score-modal').modal('toggle');
         $('#grand-score').text(totalScore);
 
@@ -291,7 +376,27 @@ $(".btn").on("click", function (event) {
 
     });
     
-  
+    $("#play-again").on('click', function () {
+            window.location.href = "/trivia";
+        });
+
+    $("#save-score").on('click', function () {
+       
+        const player = window.localStorage.getItem('userObject');
+        const player1 = Object.entries(player);
+
+        console.log(player);
+
+
+        $.post('/api/scores', {totalScore:totalScore,}, function (data) {
+            console.log(data)
+        })
+
+        });
+
+
+ 
+
     }
 });
 

@@ -21,6 +21,7 @@ module.exports = function (app) {
   });
 
   app.post("/api/users", function (req, res) {
+    console.log(req.body);
     bcrypt.hash(req.body.password, 10, function (err, hash) {
       if (err) {
         res.json("bcrypt failed");
@@ -38,22 +39,23 @@ module.exports = function (app) {
  
   app.post("/api/scores", function (req, res) {
 
-    var {scores} = req.body;
+    var {totalScore} = req.body;
+    console.log(totalScore);
 
-    db.scores.create({
-      scores: scores
+    db.Score.create({
+       scores: totalScore,
+       UserId:[db.User]
     }).then(function (scores){
-    
+      res.json(scores);
+    }).catch((err) => {
+      console.log(err);
     })
 
-  
 
+    // db.Example.findAll({}).then(function (dbExamples) {
 
-
-    db.Example.findAll({}).then(function (dbExamples) {
-
-      res.json(dbExamples);
-    });
+    //   res.json(dbExamples);
+    // });
   });
 
   // Create a new example
