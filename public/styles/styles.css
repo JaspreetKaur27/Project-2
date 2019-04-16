@@ -329,21 +329,22 @@ footer {
   margin-top : 3%;
   background: transparent;
   font-family: sans-serif;
-  text-align: center;
-  align-content: center;
+  /* text-align: center;
+  align-content: center; */
+  height: 50%;
   border-radius: 10px;
   width: 65%;
-  height: 75%;
   background: #f1f1f1;
-  
-
-
   padding: 30px 40px;
   box-sizing: border-box;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 0 20px #000000b3;
   font-family: "Montserrat",sans-serif;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
 
 }
 
@@ -357,7 +358,14 @@ footer {
   outline-color:#70c1b3;
   padding: 20px;
 }
+#answer-options{
+  width:100%;
+  justify-content: center;
+}
 
+.carousel-container{
+  width:100%;
+}
 
 
 
@@ -438,7 +446,7 @@ footer {
 }
 
 
-
+/* 
 @media screen and (max-width:550px){
 
   body{
@@ -454,4 +462,4 @@ footer {
 }
 
 
-}
+} */

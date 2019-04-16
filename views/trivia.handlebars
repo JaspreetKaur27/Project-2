@@ -36,8 +36,8 @@
             <p style="color:#038ba8"id="score">Score : 0</p>
 
           </div>
-          <div style="color:#05b89a" class="col col-md-4">
-              <h3>Trivia Mania!</h3>
+          <div style="color:#05b89a, text-align:center" class="col col-md-4">
+              <h3>CS Mania!</h3>
             <p id="username"></p>
           </div>
 
@@ -47,13 +47,13 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="carousel-container">
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-interval="false" data-ride="carousel">
           {{#if trivia }}
           <div class="carousel-inner">
             {{#each trivia}}
             <div class="carousel-item {{#ifCond @index 0}}active{{/ifCond}}">
-              <div class="card-body" id="answer-options">
+              <div id="answer-options">
                 <div>
                   <h1 class="trivia-question" data-value="{{this.correctAnswer}}" id="question-{{@index}}">{{this.question}}</h1>
                   <div class="trivia-options">
@@ -67,6 +67,8 @@
               </div>
             </div>
             {{/each}}
+          </div>
+          </div>
           </div>
           {{else}}
         <h4 style="margin: 0 auto">Loading...</h3>
@@ -99,8 +101,6 @@
         <p id="grand-score">Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-
-        <button type="button" class="btn btn-secondary" id="close-modal" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-secondary" id="play-again" data-dismiss="modal">Play Again</button>
         <button type="button" class="btn btn-primary" id="save-score" data-dismiss="modal">Save Score</button>
 
