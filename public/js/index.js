@@ -352,7 +352,7 @@ $(".btn").on("click", function (event) {
     function addScore() {
         totalScore = totalScore + 1;
         //update score 
-        $('#score').text("Score :" + totalScore + "/30");
+        $('#score').text("Score :" + totalScore + "/15");
         console.log("Total Score: " + totalScore);
     }
     //   var last = $(`#question-${carouselIndex}`).dataset();
@@ -360,7 +360,7 @@ $(".btn").on("click", function (event) {
     console.log(totalScore);
 
 
-    if (carouselIndex === 5) {
+    if (carouselIndex === 15) {
         console.log(totalScore);
 
         $('#score-modal').modal('toggle');
@@ -393,14 +393,9 @@ $(".btn").on("click", function (event) {
             }).catch((err) => {
             console.log(err)
         })
-
     });
-
-
-
     }
 });
-
 
 scoreDelete = (id) => {
     event.preventDefault();
@@ -412,12 +407,7 @@ scoreDelete = (id) => {
  });
 }
 
-
-
     // $.post('/api/trivia', triviaInfo, function (data) {
-
-
-
 
     // })
 
