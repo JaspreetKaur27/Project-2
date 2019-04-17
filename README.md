@@ -15,6 +15,6 @@ How to use (steps) :
 
 
 
-Technologies used: HTML | CSS | Handlebars | Node | Express | Mysql 
+Technologies used: HTML | CSS | Handlebars | Node | Express | Mysql | Jquery
 
 
