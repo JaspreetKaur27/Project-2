@@ -19,13 +19,13 @@
     <!--new code header div-->
 </header>
 
-
+<div class="score-container">
 {{#if scores }}
 <div class="score-title">
     <h1>Highest Scores</h1>
 </div>
 {{#each scores}}
-<div class="board-container">
+
     <div class="score-info">
        
         <div class="stats">
@@ -34,14 +34,13 @@
         <div class="stats">
             <h1>{{this.scores}}</h1>
         </div>
-        <form style="display:flex; align-items:center"onsubmit="scoreDelete({{this.id}})">
+        <form onsubmit="scoreDelete({{this.id}})">
         <button id="delete-button" type='submit' class="btn btn-danger">Delete</button>
         </form>
     </div>
-</div>
 {{/each}} 
 {{else}}
-    <div style="display:flex; justify-content:center; align-items:center">
+    <div class="no-scores">
     <h1>no scores available</h1>
         <div class="lds-facebook">
             <div></div>
@@ -50,3 +49,4 @@
         </div>
     </div>
 {{/if}}
+</div>

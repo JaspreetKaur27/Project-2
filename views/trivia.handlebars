@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a style="color: #ffe066;" class="nav-link" href="/">Home
+            <a style="color: #ffe066" class="nav-link" href="/">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -23,30 +23,24 @@
   <!--new code header div-->
 </header>
 
-<div class="container" id="main-content">
+<div class="main-content" >
   <!--Main Question container-->
   <div class="container" id="question-choice">
-    <div class="row">
+    
 
       <!--new code quiz summary container, ??Suggest to team about putting this in footer-->
-      <div class="container" id="summary">
-        <div class="row">
+        <div class="summary">
 
-          <div class="col col-md-4">
             <p style="color:#038ba8"id="score">Score : 0</p>
 
-          </div>
-          <div style="color:#05b89a, text-align:center" class="col col-md-4">
-              <h3>CS Mania!</h3>
+      
+              <h3>Computer Science Mania!</h3>
             <p id="username"></p>
-          </div>
-
-          <div class="col col-md-4">
+        
             <p style="color:#038ba8"id="counter">Time Left</p>
-          </div>
+          
         </div>
-      </div>
-    </div>
+      
     <div class="carousel-container">
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-interval="false" data-ride="carousel">
           {{#if trivia }}
