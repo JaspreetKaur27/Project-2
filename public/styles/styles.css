@@ -34,7 +34,7 @@ flex-direction: column
 .sign-container {
   display: flex;
   flex-direction: column;
-
+  overflow: auto;
   text-align:center;
   align-items: center;
 }
@@ -484,9 +484,12 @@ footer {
 
 @media screen and (max-width:600px){
 
-  body{
-    margin:0;
-  }
+
+.home-form {
+ width: 80%;
+}
+
+
 #question-choice {
 
   width: 90%;
@@ -505,7 +508,7 @@ footer {
 }
 
 .navbar {
-  overflow:auto;
+
 
 }
 .navbar-brand {
